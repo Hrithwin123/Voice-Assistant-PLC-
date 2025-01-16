@@ -1,8 +1,9 @@
 import speech_recognition as sr
 import pyttsx3 as ttsx
 import webbrowser as wb
-import sys
 import pywhatkit as whatsapp
+import sys
+import pyautogui as gui
 
 
 from contacts import contactlist
@@ -30,7 +31,7 @@ def commandlist(command):
     elif("whatsapp" in command.lower()):
         wb.open("https://web.whatsapp.com/")
         speak("opening whatsapp")
-
+    
     elif("youtube" in command.lower()):
         wb.open("https://youtube.com/")
         speak("opening youtube")
@@ -49,16 +50,15 @@ def commandlist(command):
         person = message[0]
         message = " ".join(message[1:])
 
-
         print(person)
         if(person.lower() in contactlist):
             print(contactlist[person.lower()])
             print(message)    
             whatsapp.sendwhatmsg_instantly(contactlist[person.lower()], message,7,True,1)
+            speak(f"Message has been sent")
         else:
             speak("Contact not found")
             print("Contact not found")
-
 
     elif("search" in command.lower()):
         search = []
@@ -70,7 +70,34 @@ def commandlist(command):
             if(word == "search"):
                 check = True
         search = " ".join(search)
+        speak(f"Searching {search}")
         whatsapp.search(search)
+    
+    elif("play video" in command.lower()):
+        print("youtube searching")
+        search = []
+        check = False
+        wordlist = command.split()
+        for word in wordlist:
+            if(check):
+                search.append(word)
+            if(word == "video"):
+                check = True
+        search = " ".join(search)
+        speak(f"Playing Video {search}")
+        whatsapp.playonyt(search)
+
+    elif("word" in command.lower()):
+        gui.click(612, 1044)
+        speak("opening word")
+
+    elif("excel" in command.lower()):
+        gui.click(692, 1047)
+        speak("opening excel")
+
+    elif("powerpoint" in command.lower()):
+        gui.click(764, 1052)
+        speak("opening powerpoint")
 
     else:
         print("No command available")
