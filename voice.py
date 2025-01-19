@@ -107,7 +107,7 @@ def commandlist(command):
         for word in wordlist:
             if(check):
                 search.append(word)
-            if(word == "video"):
+            if(word == "text"):
                 check = True
         search = " ".join(search)
         pyperclip.copy(search)
