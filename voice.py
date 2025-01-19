@@ -4,6 +4,7 @@ import webbrowser as wb
 import pywhatkit as whatsapp
 import sys
 import pyautogui as gui
+import pyperclip
 
 
 from contacts import contactlist
@@ -57,8 +58,8 @@ def commandlist(command):
             whatsapp.sendwhatmsg_instantly(contactlist[person.lower()], message,7,True,1)
             speak(f"Message has been sent")
         else:
-            speak("Contact not found")
             print("Contact not found")
+            speak("Contact not found")
 
     elif("search" in command.lower()):
         search = []
@@ -70,8 +71,8 @@ def commandlist(command):
             if(word == "search"):
                 check = True
         search = " ".join(search)
-        speak(f"Searching {search}")
         whatsapp.search(search)
+        speak(f"Searching {search}")
     
     elif("play video" in command.lower()):
         print("youtube searching")
@@ -84,8 +85,8 @@ def commandlist(command):
             if(word == "video"):
                 check = True
         search = " ".join(search)
-        speak(f"Playing Video {search}")
         whatsapp.playonyt(search)
+        speak(f"Playing Video {search}")
 
     elif("word" in command.lower()):
         gui.click(612, 1044)
@@ -99,8 +100,23 @@ def commandlist(command):
         gui.click(764, 1052)
         speak("opening powerpoint")
 
+    elif("copy text" in command.lower()):
+        search = []
+        check = False
+        wordlist = command.split()
+        for word in wordlist:
+            if(check):
+                search.append(word)
+            if(word == "video"):
+                check = True
+        search = " ".join(search)
+        pyperclip.copy(search)
+        speak("Copied text")
+
+
     else:
         print("No command available")
+    
             
 def initialListen():
     with sr.Microphone() as source:
