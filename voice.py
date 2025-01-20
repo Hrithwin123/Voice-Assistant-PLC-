@@ -3,8 +3,10 @@ import pyttsx3 as ttsx
 import webbrowser as wb
 import pywhatkit as whatsapp
 import sys
-import pyautogui as gui
 import pyperclip
+import subprocess
+
+
 
 
 from contacts import contactlist
@@ -89,15 +91,17 @@ def commandlist(command):
         speak(f"Playing Video {search}")
 
     elif("word" in command.lower()):
-        gui.click(612, 1044)
+        subprocess.run(["start", "winword"], shell=True)
         speak("opening word")
 
     elif("excel" in command.lower()):
-        gui.click(692, 1047)
+      
+        subprocess.run(["start", "excel"], shell=True)
         speak("opening excel")
 
     elif("powerpoint" in command.lower()):
-        gui.click(764, 1052)
+   
+        subprocess.run(["start", "powerpnt"], shell=True)
         speak("opening powerpoint")
 
     elif("copy text" in command.lower()):
@@ -131,10 +135,13 @@ def initialListen():
 
                 elif("exit" in speech.lower()):
                     speak("Python Shutting Down")
-                    sys.exit(0)
+                    sys.exit()
                     
             except:
                 print("Word wasnt recognisable")
+            
+            
+
 
         print("What would you like to do sir ??")
         speak("What would you like to do sir ??")
