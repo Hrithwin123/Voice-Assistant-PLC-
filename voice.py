@@ -6,9 +6,6 @@ import sys
 import pyperclip
 import subprocess
 
-
-
-
 from contacts import contactlist
 
 recognizer = sr.Recognizer()
@@ -127,7 +124,7 @@ def initialListen():
         while True:
             try:
                 print("Listening....")
-                audio = recognizer.listen(source, timeout = 1)
+                audio = recognizer.listen(source, phrase_time_limit=3)
                 speech = recognizer.recognize_google(audio)
 
                 if("python" in speech.lower()):
@@ -140,9 +137,6 @@ def initialListen():
             except:
                 print("Word wasnt recognisable")
             
-            
-
-
         print("What would you like to do sir ??")
         speak("What would you like to do sir ??")
         commandlisten()
